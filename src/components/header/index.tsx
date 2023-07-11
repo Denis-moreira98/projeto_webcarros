@@ -7,7 +7,7 @@ export function Header() {
    const loadingAuth = false;
 
    return (
-      <div className="w-full flex items-center justify-center h-16 bg-black drop-shadow mb-4">
+      <div className="w-full flex items-center justify-center h-16 bg-zinc-900 drop-shadow mb-4">
          <header className="flex w-full max-w-7xl px-4 mx-auto items-center justify-between">
             <Link to="/">
                <img src={LogoImg} alt="logo webcarros" />
