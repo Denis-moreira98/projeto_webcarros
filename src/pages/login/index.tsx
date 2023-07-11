@@ -1,12 +1,16 @@
 import LogoImg from "../../assets/logo.svg";
 import { Container } from "../../components/container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "../../components/input";
+
+import { auth } from "../../services/firebaseConnection";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const scheme = z.object({
    email: z
@@ -19,6 +23,8 @@ const scheme = z.object({
 type FormData = z.infer<typeof scheme>;
 
 export function Login() {
+   const navigate = useNavigate();
+
    const {
       register,
       handleSubmit,
@@ -28,8 +34,23 @@ export function Login() {
       mode: "onChange",
    });
 
+   useEffect(() => {
+      async function handleLogOut() {
+         await signOut(auth);
+      }
+      handleLogOut();
+   }, []);
+
    function onSubmit(data: FormData) {
-      console.log(data);
+      signInWithEmailAndPassword(auth, data.email, data.password)
+         .then(() => {
+            console.log("logado com sucesso");
+            navigate("/dashboard", { replace: true });
+         })
+         .catch((error) => {
+            console.log("ERRO AO LOGAR");
+            console.log(error);
+         });
    }
 
    return (
