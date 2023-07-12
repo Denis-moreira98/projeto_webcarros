@@ -5,12 +5,14 @@ import { auth } from "../services/firebaseConnection";
 type AuthContextData = {
    signed: boolean;
    loadingAuth: boolean;
+   handleInfoUser: ({ name, email, uid }: UserProps) => void;
+   user: UserProps | null;
 };
 
 interface AuthProviderProps {
    children: ReactNode;
 }
-interface userProps {
+interface UserProps {
    uid: string;
    name: string | null;
    email: string | null;
@@ -19,7 +21,7 @@ interface userProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
-   const [user, setUser] = useState<userProps | null>(null);
+   const [user, setUser] = useState<UserProps | null>(null);
    const [loadingAuth, setLoadingAuth] = useState(true);
 
    useEffect(() => {
@@ -36,6 +38,7 @@ function AuthProvider({ children }: AuthProviderProps) {
          } else {
             //Não tem user logado
             setUser(null);
+            setLoadingAuth(false);
          }
       });
       return () => {
@@ -43,8 +46,18 @@ function AuthProvider({ children }: AuthProviderProps) {
       };
    }, []);
 
+   function handleInfoUser({ name, email, uid }: UserProps) {
+      setUser({
+         name,
+         email,
+         uid,
+      });
+   }
+
    return (
-      <AuthContext.Provider value={{ signed: !!user, loadingAuth }}>
+      <AuthContext.Provider
+         value={{ signed: !!user, loadingAuth, handleInfoUser, user }}
+      >
          {children}
       </AuthContext.Provider>
    );

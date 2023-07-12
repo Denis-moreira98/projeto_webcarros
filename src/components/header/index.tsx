@@ -1,10 +1,11 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 import LogoImg from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { FiUser, FiLogIn } from "react-icons/fi";
 
 export function Header() {
-   const signer = true;
-   const loadingAuth = false;
+   const { signed, loadingAuth } = useContext(AuthContext);
 
    return (
       <div className="w-full flex items-center justify-center h-16 bg-zinc-900 drop-shadow mb-4">
@@ -13,14 +14,14 @@ export function Header() {
                <img src={LogoImg} alt="logo webcarros" />
             </Link>
 
-            {!loadingAuth && signer && (
+            {!loadingAuth && signed && (
                <Link to="/dashboard">
                   <div className="border-2 rounded-full p-1 border-white-900">
                      <FiUser size={22} color="#FFF" />
                   </div>
                </Link>
             )}
-            {!loadingAuth && !signer && (
+            {!loadingAuth && !signed && (
                <Link to="/login">
                   <div className="border-2 rounded-full p-1 border-white-900">
                      <FiLogIn size={22} color="#FFF" />

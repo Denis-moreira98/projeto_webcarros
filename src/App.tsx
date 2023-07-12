@@ -9,6 +9,7 @@ import { CarDetail } from "./pages/carDetail";
 
 import { Layout } from "./components/layout";
 import { NotFound } from "./pages/notFound";
+import { Private } from "./routes/Private";
 
 const router = createBrowserRouter([
    {
@@ -25,11 +26,19 @@ const router = createBrowserRouter([
          },
          {
             path: "/dashboard",
-            element: <Dashboard />,
+            element: (
+               <Private>
+                  <Dashboard />
+               </Private>
+            ),
          },
          {
             path: "/dashboard/new",
-            element: <New />,
+            element: (
+               <Private>
+                  <New />
+               </Private>
+            ),
          },
          {
             path: "*",
