@@ -6,6 +6,17 @@ import { useForm } from "react-hook-form";
 import { Input } from "../../../components/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ChangeEvent, useState, useContext } from "react";
+import { AuthContext } from "../../../context/authContext";
+import { v4 as uuidv4 } from "uuid";
+
+import { storage } from "../../../services/firebaseConnection";
+import {
+   ref,
+   uploadBytes,
+   getDownloadURL,
+   deleteObject,
+} from "firebase/storage";
 
 const scheme = z.object({
    name: z.string().nonempty("O campo nome é obrigatório"),
@@ -25,7 +36,15 @@ const scheme = z.object({
 
 type FormData = z.infer<typeof scheme>;
 
+interface ImageItemProps {
+   uid: string;
+   name: string;
+   previewUrl: string;
+   url: string;
+}
+
 export function New() {
+   const { user } = useContext(AuthContext);
    const {
       register,
       handleSubmit,
@@ -36,8 +55,44 @@ export function New() {
       mode: "onChange",
    });
 
+   const [carImage, sertCarImage] = useState<ImageItemProps[]>([]);
+
    function onSubmit(data: FormData) {
       console.log(data);
+   }
+   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
+      if (e.target.files && e.target.files[0]) {
+         const image = e.target.files[0];
+
+         if (image.type === "image/jpeg" || image.type === "image/png") {
+            //enviar pro banco a imagem...
+            await handleUpload(image);
+         } else {
+            alert("Envie uma imagem jpeg ou png!");
+            return;
+         }
+      }
+   }
+
+   async function handleUpload(image: File) {
+      if (!user?.uid) {
+         return;
+      }
+      const currentUid = user?.uid;
+      const uidImage = uuidv4();
+
+      const uploadRef = ref(storage, `imagens/${currentUid}${uidImage}`);
+      uploadBytes(uploadRef, image).then((snapshot) => {
+         getDownloadURL(snapshot.ref).then((downloadUrl) => {
+            const imageItem = {
+               name: uidImage,
+               uid: currentUid,
+               previewUrl: URL.createObjectURL(image),
+               url: downloadUrl,
+            };
+            sertCarImage((images) => [...images, imageItem]);
+         });
+      });
    }
 
    return (
@@ -52,12 +107,25 @@ export function New() {
                   </div>
                   <div className="cursor-pointer">
                      <input
+                        onChange={handleFile}
                         type="file"
                         accept="image/*"
                         className="opacity-0 cursor-pointer"
                      />
                   </div>
                </button>
+               {carImage.map((item) => (
+                  <div
+                     key={item.name}
+                     className="w-full h-32 flex items-center justify-center relative"
+                  >
+                     <img
+                        src={item.previewUrl}
+                        className="rounded-lg w-full h-32 object-cover"
+                        alt="Foto do carro"
+                     />
+                  </div>
+               ))}
             </div>
 
             <div className="w-full bg-white p-3 rounded-lg flex flex-col sm:flex-row items-center gap-2 mt-2">
