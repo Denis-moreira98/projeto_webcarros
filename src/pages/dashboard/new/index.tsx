@@ -1,6 +1,6 @@
 import { Container } from "../../../components/container";
 import { DashboardPanel } from "../../../components/panelHeader";
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiTrash } from "react-icons/fi";
 
 import { useForm } from "react-hook-form";
 import { Input } from "../../../components/input";
@@ -8,7 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useState, useContext } from "react";
 import { AuthContext } from "../../../context/authContext";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidV4 } from "uuid";
 
 import { storage } from "../../../services/firebaseConnection";
 import {
@@ -55,7 +55,7 @@ export function New() {
       mode: "onChange",
    });
 
-   const [carImage, sertCarImage] = useState<ImageItemProps[]>([]);
+   const [carImage, setCarImage] = useState<ImageItemProps[]>([]);
 
    function onSubmit(data: FormData) {
       console.log(data);
@@ -78,10 +78,12 @@ export function New() {
       if (!user?.uid) {
          return;
       }
-      const currentUid = user?.uid;
-      const uidImage = uuidv4();
 
-      const uploadRef = ref(storage, `imagens/${currentUid}${uidImage}`);
+      const currentUid = user?.uid;
+      const uidImage = uuidV4();
+
+      const uploadRef = ref(storage, `images/${currentUid}/${uidImage}`);
+
       uploadBytes(uploadRef, image).then((snapshot) => {
          getDownloadURL(snapshot.ref).then((downloadUrl) => {
             const imageItem = {
@@ -90,9 +92,23 @@ export function New() {
                previewUrl: URL.createObjectURL(image),
                url: downloadUrl,
             };
-            sertCarImage((images) => [...images, imageItem]);
+
+            setCarImage((images) => [...images, imageItem]);
          });
       });
+   }
+
+   async function handleDeleteImage(item: ImageItemProps) {
+      const imagePath = `images/${item.uid}/${item.name}`;
+
+      const imageRef = ref(storage, imagePath);
+
+      try {
+         await deleteObject(imageRef);
+         setCarImage(carImage.filter((car) => car.url !== item.url));
+      } catch (err) {
+         console.log("ERRO AO DELETAR");
+      }
    }
 
    return (
@@ -119,6 +135,12 @@ export function New() {
                      key={item.name}
                      className="w-full h-32 flex items-center justify-center relative"
                   >
+                     <button
+                        className="absolute"
+                        onClick={() => handleDeleteImage(item)}
+                     >
+                        <FiTrash size={28} color="#fff" />
+                     </button>
                      <img
                         src={item.previewUrl}
                         className="rounded-lg w-full h-32 object-cover"
