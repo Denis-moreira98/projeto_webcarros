@@ -10,13 +10,14 @@ import { ChangeEvent, useState, useContext } from "react";
 import { AuthContext } from "../../../context/authContext";
 import { v4 as uuidV4 } from "uuid";
 
-import { storage } from "../../../services/firebaseConnection";
+import { storage, db } from "../../../services/firebaseConnection";
 import {
    ref,
    uploadBytes,
    getDownloadURL,
    deleteObject,
 } from "firebase/storage";
+import { addDoc, collection } from "firebase/firestore";
 
 const scheme = z.object({
    name: z.string().nonempty("O campo nome é obrigatório"),
@@ -58,7 +59,38 @@ export function New() {
    const [carImage, setCarImage] = useState<ImageItemProps[]>([]);
 
    function onSubmit(data: FormData) {
-      console.log(data);
+      if (carImage.length === 0) {
+         alert("Envie alguma imagem desse carro");
+         return;
+      }
+      const carListImages = carImage.map((car) => {
+         return {
+            uid: car.uid,
+            name: car.name,
+            url: car.url,
+         };
+      });
+
+      addDoc(collection(db, "cars"), {
+         name: data.name,
+         model: data.model,
+         whatsapp: data.whatsapp,
+         city: data.city,
+         km: data.km,
+         price: data.price,
+         description: data.description,
+         year: data.year,
+         created: new Date(),
+         owner: user.name,
+         uid: user?.uid,
+         images: carListImages,
+      })
+         .then(() => {
+            reset();
+            console.log("Cadastrado com sucesso");
+            setCarImage([]);
+         })
+         .catch((error) => console.log(error));
    }
    async function handleFile(e: ChangeEvent<HTMLInputElement>) {
       if (e.target.files && e.target.files[0]) {
