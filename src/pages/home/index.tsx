@@ -68,7 +68,7 @@ export function Home() {
             </button>
          </section>
          <h1 className="font-bold text-center mt-6 text-2xl mb-4">
-            Carros novos e usados em trodo Brasil
+            Carros novos e usados em todo Brasil
          </h1>
 
          <main className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
