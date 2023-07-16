@@ -103,7 +103,7 @@ export function CarDetail() {
             </Swiper>
          )}
          {car && (
-            <main className="w-full bg-white rounded-lg p- my-4">
+            <main className="w-full bg-white rounded-lg px-3 my-5">
                <div className="flex flex-col sm:flex-row mb-4 items-center justify-between">
                   <h1 className="font-bold text-3xl text-black ">
                      {car?.name}
@@ -140,7 +140,7 @@ export function CarDetail() {
 
                <a
                   target="_blank"
-                  className="bg-green-500 w-1full text-white flex items-center justify-center gap-2 my-6 h-11 text-xl rounded-lg cursor-pointer font-medium"
+                  className="bg-green-500 w-full text-white flex items-center justify-center gap-2 my-5 h-11 text-xl rounded-lg cursor-pointer font-medium"
                   href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá vi esse ${car.name} no site WebCarros e fiquei interessado!`}
                >
                   Conversar com vendedor
