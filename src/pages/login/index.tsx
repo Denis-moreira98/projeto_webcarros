@@ -12,6 +12,8 @@ import { Input } from "../../components/input";
 import { auth } from "../../services/firebaseConnection";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
+import { toast } from "react-hot-toast";
+
 const scheme = z.object({
    email: z
       .string()
@@ -45,11 +47,13 @@ export function Login() {
       signInWithEmailAndPassword(auth, data.email, data.password)
          .then(() => {
             console.log("logado com sucesso");
+            toast.success("Logado com sucesso!");
             navigate("/dashboard", { replace: true });
          })
          .catch((error) => {
             console.log("ERRO AO LOGAR");
             console.log(error);
+            toast.error("Erro ao fazer o login.");
          });
    }
 
