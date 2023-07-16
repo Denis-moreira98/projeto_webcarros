@@ -62,7 +62,7 @@ export function Register() {
             });
             console.log("Cadastrado com sucesso");
             toast.success("Cadastrado com sucesso!");
-            navigate("/dashboard", { replace: true });
+            navigate("/login", { replace: true });
          })
          .catch((error) => {
             console.log("Erro ao cadastrar esse usuário");
