@@ -18,7 +18,7 @@ import "swiper/css/scrollbar";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
    <React.StrictMode>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <AuthProvider>
          <RouterProvider router={router} />
       </AuthProvider>

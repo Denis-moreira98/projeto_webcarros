@@ -103,45 +103,46 @@ export function CarDetail() {
             </Swiper>
          )}
          {car && (
-            <main className="w-full bg-white rounded-lg px-3 my-5">
-               <div className="flex flex-col sm:flex-row mb-4 items-center justify-between">
-                  <h1 className="font-bold text-3xl text-black ">
-                     {car?.name}
-                  </h1>
-                  <h1 className="font-bold text-3xl text-black ">
-                     R${car?.price}
-                  </h1>
-               </div>
-               <p>{car?.model}</p>
-               <div className="flex w-full gap-6 my-4">
-                  <div className="flex flex-col gap-4">
-                     <div>
-                        <p>Cidade</p>
-                        <strong>{car?.city}</strong>
+            <main className="w-full bg-white rounded-lg my-5">
+               <div className="px-3 pt-2 ">
+                  <div className="flex flex-col sm:flex-row mb-4 items-center justify-between">
+                     <h1 className="font-bold text-3xl text-black ">
+                        {car?.name}
+                     </h1>
+                     <h1 className="font-bold text-3xl text-black ">
+                        R${car?.price}
+                     </h1>
+                  </div>
+                  <p>{car?.model}</p>
+                  <div className="flex w-full gap-6 my-4">
+                     <div className="flex flex-col gap-4">
+                        <div>
+                           <p>Cidade</p>
+                           <strong>{car?.city}</strong>
+                        </div>
+                        <div>
+                           <p>Ano</p>
+                           <strong>{car?.year}</strong>
+                        </div>
                      </div>
-                     <div>
-                        <p>Ano</p>
-                        <strong>{car?.year}</strong>
+
+                     <div className="flex flex-col gap-4">
+                        <div>
+                           <p>KM</p>
+                           <strong>{car?.km}</strong>
+                        </div>
                      </div>
                   </div>
+                  <strong>Descrição:</strong>
+                  <p className="mb-4">{car?.description}</p>
 
-                  <div className="flex flex-col gap-4">
-                     <div>
-                        <p>KM</p>
-                        <strong>{car?.km}</strong>
-                     </div>
-                  </div>
+                  <strong>Telefone / WhatsApp</strong>
+                  <p>{car?.whatsapp}</p>
                </div>
-               <strong>Descrição:</strong>
-               <p className="mb-4">{car?.description}</p>
-
-               <strong>Telefone / WhatsApp</strong>
-               <p>{car?.whatsapp}</p>
-
                <a
                   target="_blank"
                   className="bg-green-500 w-full text-white flex items-center justify-center gap-2 my-5 h-11 text-xl rounded-lg cursor-pointer font-medium"
-                  href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá vi esse ${car.name} no site WebCarros e fiquei interessado!`}
+                  href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá, vi esse ${car.name} no site WebCarros e fiquei interessado!`}
                >
                   Conversar com vendedor
                   <FaWhatsapp size={26} color="#fff" />

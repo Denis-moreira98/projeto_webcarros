@@ -3,6 +3,8 @@ import { DashboardPanel } from "../../components/panelHeader";
 import { FiTrash2 } from "react-icons/fi";
 import { useEffect, useState, useContext } from "react";
 
+import { toast } from "react-hot-toast";
+
 import {
    collection,
    getDocs,
@@ -73,11 +75,11 @@ export function Dashboard() {
       itemCar.images.map(async (image) => {
          const imagePath = `images/${image.uid}/${image.name}`;
          const imageRef = ref(storage, imagePath);
-         //console.log("deletado com sucesso");
 
          try {
             await deleteObject(imageRef);
             setCars(cars.filter((car) => car.id !== itemCar.id));
+            toast.success("Carro deletado com sucesso!");
          } catch (err) {
             console.log("erro ao excluir essa imagem");
          }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FiUser, FiLogIn } from "react-icons/fi";
 
 export function Header() {
-   const { signed, loadingAuth } = useContext(AuthContext);
+   const { signed, loadingAuth, user } = useContext(AuthContext);
 
    return (
       <div className="w-full flex items-center justify-center h-16 bg-zinc-900 drop-shadow mb-4">
@@ -16,15 +16,19 @@ export function Header() {
 
             {!loadingAuth && signed && (
                <Link to="/dashboard">
-                  <div className="border-2 rounded-full p-1 border-white-900">
-                     <FiUser size={22} color="#FFF" />
+                  <div className="flex flex-row gap-3 items-center">
+                     <p className="text-white">Olá, {user?.name}</p>
+                     <div className="border-2 rounded-full p-1 border-white-900">
+                        <FiUser size={22} color="#FFF" />
+                     </div>
                   </div>
                </Link>
             )}
             {!loadingAuth && !signed && (
                <Link to="/login">
-                  <div className="border-2 rounded-full p-1 border-white-900">
-                     <FiLogIn size={22} color="#FFF" />
+                  <div className=" flex flex-row items-center justify-items-center gap-1 rounded-full text-white border-2  p-2 border-white-900">
+                     <button>Login</button>
+                     <FiLogIn size={20} />
                   </div>
                </Link>
             )}
