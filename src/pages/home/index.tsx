@@ -111,7 +111,7 @@ export function Home() {
             Carros novos e usados em todo Brasil
          </h1>
 
-         <main className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+         <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {cars.map((car) => (
                <Link key={car.id} to={`/car/${car.id}`}>
                   <section className="w-full bg-white rounded-lg">
