@@ -96,16 +96,16 @@ export function CarDetail() {
                   <SwiperSlide key={image.name}>
                      <img
                         src={image.url}
-                        className="w-full h-96 object-cover"
+                        className="w-full h-96 object-cover rounded-t-lg"
                      />
                   </SwiperSlide>
                ))}
             </Swiper>
          )}
          {car && (
-            <main className="w-full bg-white rounded-lg my-5">
+            <main className="w-full bg-white rounded-b-lg mb-5">
                <div className="px-3 pt-2 ">
-                  <div className="flex flex-col sm:flex-row mb-4 items-center justify-between">
+                  <div className="flex flex-col sm:flex-row mb-0   items-center justify-between">
                      <h1 className="font-bold text-3xl text-black ">
                         {car?.name}
                      </h1>
@@ -113,23 +113,23 @@ export function CarDetail() {
                         R${car?.price}
                      </h1>
                   </div>
-                  <p>{car?.model}</p>
+                  <p className="text-slate-500 font-semibold">{car?.model}</p>
                   <div className="flex w-full gap-6 my-4">
                      <div className="flex flex-col gap-4">
                         <div>
-                           <p>Cidade</p>
-                           <strong>{car?.city}</strong>
+                           <strong>Cidade:</strong>
+                           <p>{car?.city}</p>
                         </div>
                         <div>
-                           <p>Ano</p>
-                           <strong>{car?.year}</strong>
+                           <strong>Ano:</strong>
+                           <p>{car?.year}</p>
                         </div>
                      </div>
 
                      <div className="flex flex-col gap-4">
                         <div>
-                           <p>KM</p>
-                           <strong>{car?.km}</strong>
+                           <strong>KM:</strong>
+                           <p>{car?.km}</p>
                         </div>
                      </div>
                   </div>
@@ -145,7 +145,7 @@ export function CarDetail() {
                   href={`https://api.whatsapp.com/send?phone=${car?.whatsapp}&text=Olá, vi esse ${car.name} no site WebCarros e fiquei interessado!`}
                >
                   Conversar com vendedor
-                  <FaWhatsapp size={26} color="#fff" />
+                  <FaWhatsapp size={28} color="#fff" />
                </a>
             </main>
          )}
