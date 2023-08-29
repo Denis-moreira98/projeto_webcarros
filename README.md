@@ -16,7 +16,7 @@
 - Tailwindcss: Framework do CSS para estilizar;
 - Banco de dados Firebase;
 
-  [Deploy](https://webcarros-ten.vercel.app/) 🚀
+  [Deploy](https://webcarros-ten.vercel.app/) 🚀🚗
 
 
 ![home](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/5bb6831a-7a51-42f2-9673-e071a4129b2e)
