@@ -3,8 +3,6 @@ import { DashboardPanel } from "../../components/panelHeader";
 import { FiTrash2 } from "react-icons/fi";
 import { useEffect, useState, useContext } from "react";
 
-import { toast } from "react-hot-toast";
-
 import {
    collection,
    getDocs,
