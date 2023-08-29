@@ -79,7 +79,6 @@ export function Dashboard() {
          try {
             await deleteObject(imageRef);
             setCars(cars.filter((car) => car.id !== itemCar.id));
-            toast.success("Carro deletado com sucesso!");
          } catch (err) {
             console.log("erro ao excluir essa imagem");
          }
