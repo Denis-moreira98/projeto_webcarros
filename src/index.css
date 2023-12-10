@@ -11,3 +11,16 @@
 body {
    background-color: rgb(204, 204, 204);
 }
+
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+::-webkit-scrollbar-track {
+   background: rgb(204, 204, 204);
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgb(129, 129, 129);
+   border-radius: 15px;
+}
