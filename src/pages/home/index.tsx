@@ -5,6 +5,8 @@ import { collection, query, getDocs, orderBy, where } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
 
 import { Link } from "react-router-dom";
+import { Loading } from "../../components/loading";
+import { set } from "firebase/database";
 
 interface CarsProps {
    id: string;
@@ -26,10 +28,16 @@ export function Home() {
    const [cars, setCars] = useState<CarsProps[]>([]);
    const [loadImages, setLoadImages] = useState<string[]>([]);
    const [input, setInput] = useState("");
+   const [loading, setLoading] = useState(false);
 
    useEffect(() => {
       loadCars();
+      setLoading(true);
    }, []);
+
+   if (loading) {
+      return <Loading />;
+   }
 
    function loadCars() {
       const carsRef = collection(db, "cars");
@@ -51,6 +59,7 @@ export function Home() {
             });
          });
          setCars(listCars);
+         setLoading(false);
       });
    }
 
