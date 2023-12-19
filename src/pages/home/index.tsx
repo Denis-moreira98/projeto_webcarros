@@ -6,7 +6,6 @@ import { db } from "../../services/firebaseConnection";
 
 import { Link } from "react-router-dom";
 import { Loading } from "../../components/loading";
-import { set } from "firebase/database";
 
 interface CarsProps {
    id: string;
@@ -120,7 +119,7 @@ export function Home() {
             Carros novos e usados em todo Brasil
          </h1>
 
-         <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+         <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-5">
             {cars.map((car) => (
                <Link key={car.id} to={`/car/${car.id}`}>
                   <section className="w-full bg-white rounded-lg">
@@ -134,7 +133,7 @@ export function Home() {
                      ></div>
                      <img
                         onLoad={() => handleImageLoad(car.id)}
-                        className="w-full rounded-lg max-h-72 hover:scale-105 transition-all duration-500"
+                        className="w-full min-h-[288px] rounded-lg max-h-72 hover:scale-105 transition-all duration-500"
                         src={car.images[0].url}
                         alt="Carro"
                         style={{
