@@ -125,7 +125,7 @@ export function Home() {
                      ></div>
                      <img
                         onLoad={() => handleImageLoad(car.id)}
-                        className="w-full rounded-lg max-h-72 hover:scale-105 transition-all"
+                        className="w-full rounded-lg max-h-72 hover:scale-105 transition-all duration-500"
                         src={car.images[0].url}
                         alt="Carro"
                         style={{
