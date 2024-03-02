@@ -3,8 +3,9 @@
 O Projeto WebCarros é uma plataforma online para compra e venda de carros seminovos. Oferece uma experiência intuitiva, permitindo que usuários anunciem seus veículos para venda ou explorem opções disponíveis no mercado.
 Este projeto oferece uma solução prática e eficiente para transações de carros online, destacando-se pela usabilidade e tecnologias modernas empregadas.
 
+![Group 1 (1)](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/abb9e75e-2aa7-4b29-94f4-b7db3363524d)
 
-![home](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/5bb6831a-7a51-42f2-9673-e071a4129b2e)
+
 
 ### Funcionalidades:
 - Lista Ordenada: Página principal exibe carros anunciados, ordenados por data (os mais recentes no topo);
@@ -22,7 +23,7 @@ Este projeto oferece uma solução prática e eficiente para transações de car
   [Deploy](https://webcarros-ten.vercel.app/) 🚀🚗
 
 
-
+![home](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/5bb6831a-7a51-42f2-9673-e071a4129b2e)
 ![cardail](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/5b88612c-9bbd-4531-9fe6-79b002258862)
 ![cadastro](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/15d8c753-68f3-4770-b1e3-34d2f5e2f918)
 ![login](https://github.com/Denis-moreira98/projeto_webcarros/assets/72985107/b57c7be3-b182-4991-9b1f-a05588c3354a)
