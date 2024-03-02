@@ -17,7 +17,9 @@ export function Header() {
             {!loadingAuth && signed && (
                <Link to="/dashboard">
                   <div className="flex flex-row gap-3 items-center">
-                     <p className="text-white">Olá, {user?.name}</p>
+                     <p className="text-white max-sm:text-sm">
+                        Olá, {user?.name.split(" ")[0]}
+                     </p>
                      <div className="border-2 rounded-full p-1 border-white-900">
                         <FiUser size={22} color="#FFF" />
                      </div>
