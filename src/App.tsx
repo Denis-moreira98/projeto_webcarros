@@ -6,7 +6,6 @@ import { Register } from "./pages/register";
 import { Dashboard } from "./pages/dashboard";
 import { New } from "./pages/dashboard/new";
 import { CarDetail } from "./pages/carDetail";
-
 import { Layout } from "./components/layout";
 import { NotFound } from "./pages/notFound";
 import { Private } from "./routes/Private";
